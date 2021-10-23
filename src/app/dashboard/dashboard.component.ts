@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DialogsComponent } from '../dialogs/dialogs.component';
 import { DataService } from '../services/data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface PeriodicElement {
   name: string;
@@ -38,7 +39,7 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
   
-  constructor(public dialog: MatDialog, private _ds: DataService, private _router: Router) {
+  constructor(public dialog: MatDialog, private _ds: DataService, private _router: Router, public _snackbar: MatSnackBar) {
     this.subs = this._ds.getUpdate().subscribe(message => {
       this.message = message;
       this.ngOnInit();

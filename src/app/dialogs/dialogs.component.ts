@@ -11,7 +11,7 @@ import { DataService } from '../services/data.service';
 export class DialogsComponent implements OnInit {
   formData: FormData = new FormData();
 
-  constructor(  @Inject(MAT_DIALOG_DATA) public data: any, private dialogReg: MatDialogRef<DialogsComponent>, private _ds: DataService) { }
+  constructor(  @Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<DialogsComponent>, private _ds: DataService) { }
 
   ngOnInit(): void {
     this.pullRank()
@@ -78,4 +78,8 @@ export class DialogsComponent implements OnInit {
     })
   }
   // ADD SHIP
+
+  closeDialog(){
+    this.dialogRef.close();
+  }
 }
