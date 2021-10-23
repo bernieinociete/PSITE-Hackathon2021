@@ -133,7 +133,6 @@ export class DialogsComponent implements OnInit {
     this.transaction_info.transaction_origin_longitude = this.transaction_origin_longitude
     this.transaction_info.transaction_destination_latitude = this.transaction_destination_latitude
     this.transaction_info.transaction_destination_longitude = this.transaction_destination_longitude
-    this.transaction_info.ship_id = this.ship_id
 
     const point1 = { lat: this.transaction_origin_latitude, lng: this.transaction_origin_longitude}
     const point2 = { lat: this.transaction_destination_latitude, lng: this.transaction_destination_longitude}
