@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { DataService } from '../services/data.service';
 export class DialogsComponent implements OnInit {
   formData: FormData = new FormData();
 
-  constructor(  @Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<DialogsComponent>, private _ds: DataService) { }
+  constructor(  @Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<DialogsComponent>, private _ds: DataService, public _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.pullRank()
@@ -61,8 +62,13 @@ export class DialogsComponent implements OnInit {
 
     this._ds.sendFileRequest('addCrew', this.formData).subscribe((data: {payload:any}) => {
       this.sendMessage()
+    }, (er:any)=>{
+      this._snackBar.open("Wrong Credentials", 'Try Again', {
+        duration:1500
+      });
     })
   }
+
   // ADD CREW
 
   // ADD SHIP
