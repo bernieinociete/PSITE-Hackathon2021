@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { DialogsComponent } from '../dialogs/dialogs.component';
 import { DataService } from '../services/data.service';
 
@@ -31,15 +32,41 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  message: any;
+  private subs: Subscription;
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
   
-  constructor(public dialog: MatDialog, private _ds: DataService, private _router: Router) { }
-
-  ngOnInit(): void {
+  constructor(public dialog: MatDialog, private _ds: DataService, private _router: Router) {
+    this.subs = this._ds.getUpdate().subscribe(message => {
+      this.message = message;
+      this.ngOnInit();
+    });
   }
 
+  ngOnInit(): void {
+    this.pullCrew()
+    this.pullShip()
+  }
+
+  // CREW
+  pullCrew() {
+    this._ds.sendApiRequest('crew/', null).subscribe((data: {payload: any}) => {
+      console.log(data.payload)
+    })
+  }
+  // CREW
+
+  // SHIP
+  pullShip() {
+    this._ds.sendApiRequest('ship/', null).subscribe((data: {payload: any}) => {
+      console.log(data.payload)
+    })
+  }
+  // SHIP
+
+  // DIALOG
   openDialog(option:any){
     const dialogConfig = new MatDialogConfig();
     

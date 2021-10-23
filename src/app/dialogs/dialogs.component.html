@@ -1,67 +1,64 @@
 <div *ngIf="data.option == 'crew'">
-    <form class="example-form">
+    <form (submit)="addCrew()" class="example-form">
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>First Name</mat-label>
-            <input matInput>
+            <input type="text" [(ngModel)]="crew_fname" name="crew_fname" matInput>
         </mat-form-field>
 
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>Middle Name</mat-label>
-            <input matInput>
+            <input type="text" [(ngModel)]="crew_mname" name="crew_mname" matInput>
         </mat-form-field>
 
         
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>Last Name</mat-label>
-            <input matInput>
+            <input type="text" [(ngModel)]="crew_lname" name="crew_lname" matInput>
         </mat-form-field>
 
         <mat-form-field class="rank-input" appearance="fill">
             <mat-label>Ranks</mat-label>
-            <mat-select>
-            <mat-option>
-                Hello
-            </mat-option>
+            <mat-select [(ngModel)]="rank_id" name="rank_id">
+                <mat-option *ngFor="let rank of rank_data" value="{{rank.rank_id}}">{{rank.rank_name}}</mat-option>
             </mat-select>
         </mat-form-field>
-    </form>
-    <div>
-        <button class="fullwidth-btn" mat-raised-button>Upload Contract</button>
-    </div> 
-    
-    <div class="add-btn">
-        <button mat-raised-button>Add</button>
-    </div>
+        <div>
+            <input type="file" (change)="onSelect($event)">
+            <button class="fullwidth-btn" mat-raised-button>Upload Contract</button>
+        </div> 
+        
+        <div class="add-btn">
+            <button type="submit" mat-raised-button>Add</button>
+        </div>
 
-    <div class="close-btn">
-        <button mat-raised-button>Cancel</button>
-    </div>
+        <div class="close-btn">
+            <button mat-raised-button>Cancel</button>
+        </div>
+    </form>
 </div>
 
 <div *ngIf="data.option == 'ship'">
-    <form class="example-form">
+    <form (submit)="addShip()" class="example-form">
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>Ship Name</mat-label>
-            <input matInput>
+            <input type="text" [(ngModel)]="ship_name" name="ship_name" matInput>
         </mat-form-field>
 
         <mat-form-field class="fullwidth-btn" appearance="fill">
             <mat-label>Ship Class</mat-label>
-            <mat-select>
-            <mat-option>
-                Hello
-            </mat-option>
+            <mat-select [(ngModel)]="ship_speed_id" name="ship_speed_id">
+                <mat-option *ngFor="let speed of ship_speed_data" value="{{speed.ship_speed_id}}">{{speed.ship_speed_class}}</mat-option>
             </mat-select>
         </mat-form-field>
+        
+        <div class="add-btn">
+            <button type="submit" mat-raised-button>Add</button>
+        </div>
+
+        <div class="close-btn">
+            <button mat-raised-button>Cancel</button>
+        </div>
     </form>
-
-    <div class="add-btn">
-        <button mat-raised-button>Add</button>
-    </div>
-
-    <div class="close-btn">
-        <button mat-raised-button>Cancel</button>
-    </div>
 </div>
 
 <div *ngIf="data.option == 'deploy'">
