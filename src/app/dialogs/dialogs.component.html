@@ -9,7 +9,6 @@
             <mat-label>Middle Name</mat-label>
             <input type="text" [(ngModel)]="crew_mname" name="crew_mname" matInput>
         </mat-form-field>
-
         
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>Last Name</mat-label>
@@ -22,19 +21,23 @@
                 <mat-option *ngFor="let rank of rank_data" value="{{rank.rank_id}}">{{rank.rank_name}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <div>
-            <input type="file" (change)="onSelect($event)">
-            <button class="fullwidth-btn" mat-raised-button>Upload Contract</button>
-        </div> 
+
+        <input class="fullwidth-btn" mat-raised-button type="file" (change)="onSelect($event)">
+        <!-- <button >Upload Contract</button> -->
+
+        <!-- <mat-form-field class="contract-input" appearance="fill">
+            <mat-label>Contract</mat-label>
+            <input class="fullwidth-btn" mat-raised-button type="file" (change)="onSelect($event)">
+            <button >Upload Contract</button>
+        </mat-form-field> -->
         
         <div class="add-btn">
             <button type="submit" mat-raised-button>Add</button>
         </div>
-
-        <div class="close-btn">
-            <button mat-raised-button>Cancel</button>
-        </div>
     </form>
+    <div class="close-btn">
+        <button mat-raised-button>Cancel</button>
+    </div>
 </div>
 
 <div *ngIf="data.option == 'ship'">
@@ -54,11 +57,10 @@
         <div class="add-btn">
             <button type="submit" mat-raised-button>Add</button>
         </div>
-
-        <div class="close-btn">
-            <button mat-raised-button>Cancel</button>
-        </div>
     </form>
+    <div class="close-btn">
+        <button mat-raised-button>Cancel</button>
+    </div>
 </div>
 
 <div *ngIf="data.option == 'deploy'">

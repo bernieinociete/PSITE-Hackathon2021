@@ -49,7 +49,7 @@ export class DialogsComponent implements OnInit {
   }
 
   crew_fname: any
-  crew_mname: any
+  crew_mname: any = ''
   crew_lname: any
   rank_id: any
   crew_contract: any
@@ -61,6 +61,7 @@ export class DialogsComponent implements OnInit {
 
     this._ds.sendFileRequest('addCrew', this.formData).subscribe((data: {payload:any}) => {
       this.sendMessage()
+      this.closeDialog()
     })
   }
   // ADD CREW
@@ -75,6 +76,7 @@ export class DialogsComponent implements OnInit {
 
     this._ds.sendApiRequest('addShip', this.ship_info).subscribe((data: {payload:any}) => {
       this.sendMessage()
+      this.closeDialog()
     })
   }
   // ADD SHIP

@@ -10,39 +10,41 @@
             <button class="add-btn" mat-raised-button (click)="openDialog('crew')">Add Crew</button>
         </div>
 
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSourceCrew" class="mat-elevation-z8">
 
             <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
           
             <!-- Position Column -->
-            <ng-container matColumnDef="position">
+            <ng-container matColumnDef="crew_id">
               <th mat-header-cell *matHeaderCellDef> Crew ID </th>
-              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.crew_id}} </td>
             </ng-container>
           
             <!-- Name Column -->
-            <ng-container matColumnDef="name">
+            <ng-container matColumnDef="crew_name">
               <th mat-header-cell *matHeaderCellDef> Crew Name </th>
-              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.crew_fname}} {{element.crew_mname}} {{element.crew_lname}}</td>
             </ng-container>
           
             <!-- Weight Column -->
-            <ng-container matColumnDef="weight">
+            <ng-container matColumnDef="crew_rank">
               <th mat-header-cell *matHeaderCellDef> Rank </th>
-              <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.rank_name}} </td>
             </ng-container>
           
             <!-- Symbol Column -->
-            <ng-container matColumnDef="symbol">
+            <ng-container matColumnDef="crew_status">
               <th mat-header-cell *matHeaderCellDef> Status </th>
-              <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+              <td mat-cell *matCellDef="let element"> 
+                  <div *ngIf="element.crew_status == 1">Not Deployed</div>
+                  <div *ngIf="element.crew_status == 2">Deployed</div>
+                </td>
             </ng-container>
           
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-          
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCrew"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsCrew;"></tr>
+        </table>
           
     </mat-tab>
 
@@ -50,6 +52,48 @@
         <div class="add-btn">
             <button mat-raised-button (click)="openDialog('ship')">Add Ship</button>
         </div>
+
+        <table mat-table [dataSource]="dataSourceShip" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="ship_id">
+              <th mat-header-cell *matHeaderCellDef> Ship ID </th>
+              <td mat-cell *matCellDef="let element"> {{element.ship_id}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="ship_name">
+              <th mat-header-cell *matHeaderCellDef> Ship Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.ship_name}}</td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="ship_class">
+              <th mat-header-cell *matHeaderCellDef> Ship Class </th>
+              <td mat-cell *matCellDef="let element"> {{element.ship_speed_class}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="ship_speed">
+                <th mat-header-cell *matHeaderCellDef> Ship Speed </th>
+                <td mat-cell *matCellDef="let element"> {{element.ship_speed_knots}} Knots</td>
+              </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="ship_status">
+              <th mat-header-cell *matHeaderCellDef> Status </th>
+              <td mat-cell *matCellDef="let element"> 
+                  <div *ngIf="element.ship_status == 1">Not Deployed</div>
+                  <div *ngIf="element.ship_status == 2">Deployed</div>
+                </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsShip"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsShip;"></tr>
+        </table>
     </mat-tab>
 
     <mat-tab label="Deployment">         

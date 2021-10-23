@@ -1,31 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DialogsComponent } from '../dialogs/dialogs.component';
 import { DataService } from '../services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
 
 @Component({
   selector: 'app-dashboard',
@@ -33,17 +13,20 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  message: any;
-  private subs: Subscription;
+  message: any
+  private subs: Subscription
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumnsCrew: string[] = ['crew_id', 'crew_name', 'crew_rank', 'crew_status']
+  dataSourceCrew: any
+
+  displayedColumnsShip: string[] = ['ship_id', 'ship_name', 'ship_class', 'ship_speed']
+  dataSourceShip: any
   
   constructor(public dialog: MatDialog, private _ds: DataService, private _router: Router, public _snackbar: MatSnackBar) {
     this.subs = this._ds.getUpdate().subscribe(message => {
-      this.message = message;
-      this.ngOnInit();
-    });
+      this.message = message
+      this.ngOnInit()
+    })
   }
 
   ngOnInit(): void {
@@ -52,17 +35,21 @@ export class DashboardComponent implements OnInit {
   }
 
   // CREW
+  crew_data: any[] = []
   pullCrew() {
     this._ds.sendApiRequest('crew/', null).subscribe((data: {payload: any}) => {
-      console.log(data.payload)
+      this.crew_data = data.payload;
+      this.dataSourceCrew = new MatTableDataSource(this.crew_data);
     })
   }
   // CREW
 
   // SHIP
+  ship_data: any[] = []
   pullShip() {
     this._ds.sendApiRequest('ship/', null).subscribe((data: {payload: any}) => {
-      console.log(data.payload)
+      this.ship_data = data.payload;
+      this.dataSourceShip = new MatTableDataSource(this.ship_data);
     })
   }
   // SHIP
@@ -71,7 +58,7 @@ export class DashboardComponent implements OnInit {
   openDialog(option:any){
     const dialogConfig = new MatDialogConfig();
     
-    dialogConfig.maxWidth = '400px';
+    dialogConfig.maxWidth = '400px'
     
     dialogConfig.data = {
       option: option
@@ -80,7 +67,7 @@ export class DashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogsComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The dialog was closed')
     });
   }
 
