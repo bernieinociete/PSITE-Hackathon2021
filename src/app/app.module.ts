@@ -39,6 +39,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     FormsModule,
     HttpClientModule,
+
   ],
   providers: [
     HttpClient,

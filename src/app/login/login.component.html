@@ -5,12 +5,12 @@
             <mat-card-title class="login-title">Agency Management System</mat-card-title>
             
             <form (submit)="login()">
-                <mat-form-field class="login-input" appearance="fill">
+                <mat-form-field class="login-input" appearance="fill" required>
                   <mat-label>Username</mat-label>
                   <input type="text" [(ngModel)]="account_username" name="account_username" matInput>
                 </mat-form-field>
 
-                <mat-form-field class="login-input" appearance="fill">
+                <mat-form-field class="login-input" appearance="fill" required>
                     <mat-label>Password</mat-label>
                     <input type="password" [(ngModel)]="account_password" name="account_password" matInput>
                 </mat-form-field>
