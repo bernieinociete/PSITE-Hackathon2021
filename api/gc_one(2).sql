@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2021 at 08:22 AM
+-- Generation Time: Oct 23, 2021 at 10:47 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -67,12 +67,22 @@ CREATE TABLE `tbl_crew` (
   `ship_id` int(11) NOT NULL DEFAULT 0,
   `rank_id` int(11) NOT NULL,
   `crew_fname` varchar(100) NOT NULL,
-  `crew_mname` varchar(100) NOT NULL,
+  `crew_mname` varchar(100) DEFAULT NULL,
   `crew_lname` varchar(100) NOT NULL,
+  `crew_contract` varchar(200) NOT NULL,
   `crew_status` int(11) NOT NULL DEFAULT 1,
   `crew_createdAt` datetime NOT NULL DEFAULT current_timestamp(),
   `crew_updatedAt` datetime DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_crew`
+--
+
+INSERT INTO `tbl_crew` (`crew_id`, `ship_id`, `rank_id`, `crew_fname`, `crew_mname`, `crew_lname`, `crew_contract`, `crew_status`, `crew_createdAt`, `crew_updatedAt`) VALUES
+(3, 0, 1, 'Bernie', 'Legua', 'Inociete', 'http://localhost/RAITE_GC_Team1/api/uploads/202110230915420.pdf', 1, '2021-10-23 15:15:42', NULL),
+(8, 0, 2, 'Nicole', '', 'Marcial', 'http://localhost/RAITE_GC_Team1/api/uploads/202110230946150.pdf', 1, '2021-10-23 15:46:15', NULL),
+(9, 0, 6, 'Gordon', '', 'College', 'http://localhost/RAITE_GC_Team1/api/uploads/202110231045210.pdf', 1, '2021-10-23 16:45:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -134,7 +144,9 @@ CREATE TABLE `tbl_ship` (
 --
 
 INSERT INTO `tbl_ship` (`ship_id`, `ship_speed_id`, `ship_name`, `ship_status`, `ship_createdAt`, `ship_updatedAt`) VALUES
-(1, 1, 'GC Cruise Ship', 1, '2021-10-23 13:09:01', NULL);
+(1, 1, 'GC Cruise Ship', 1, '2021-10-23 13:09:01', NULL),
+(2, 1, 'Gordon College', 1, '2021-10-23 15:52:50', NULL),
+(3, 2, 'RAITE ', 1, '2021-10-23 16:45:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -170,8 +182,10 @@ CREATE TABLE `tbl_transaction` (
   `transaction_id` int(11) NOT NULL,
   `transaction_no` int(11) NOT NULL,
   `transaction_eta` int(11) NOT NULL,
-  `transaction_origin` varchar(200) NOT NULL,
-  `transaction_destination` varchar(200) NOT NULL,
+  `transaction_origin_longitude` varchar(200) NOT NULL,
+  `transaction_origin_latitude` varchar(200) NOT NULL,
+  `transaction_destination_longitude` varchar(200) NOT NULL,
+  `transaction_destination_latitude` varchar(200) NOT NULL,
   `transaction_createdAt` datetime NOT NULL DEFAULT current_timestamp(),
   `transaction_updatedAt` datetime DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -236,7 +250,7 @@ ALTER TABLE `tbl_archive`
 -- AUTO_INCREMENT for table `tbl_crew`
 --
 ALTER TABLE `tbl_crew`
-  MODIFY `crew_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `crew_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_rank`
@@ -248,7 +262,7 @@ ALTER TABLE `tbl_rank`
 -- AUTO_INCREMENT for table `tbl_ship`
 --
 ALTER TABLE `tbl_ship`
-  MODIFY `ship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_ship_speed`
