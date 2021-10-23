@@ -1,0 +1,85 @@
+<div *ngIf data.option = 'crew'>
+    <form class="example-form">
+        <mat-form-field class="login-input" appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="login-input" appearance="fill">
+            <mat-label>Middle Name</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        
+        <mat-form-field class="login-input" appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Ranks</mat-label>
+            <mat-select>
+            <mat-option>
+                Hello
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+    <div>
+        <button mat-raised-button>Deploy</button>
+    </div> 
+    
+    <div class="add-btn">
+        <button mat-raised-button>Add</button>
+    </div>
+
+    <div class="close-btn">
+        <button mat-raised-button>Cancel</button>
+    </div>
+</div>
+
+<div *ngIf data.option = 'ship'>
+    <form class="example-form">
+        <mat-form-field class="login-input" appearance="fill">
+            <mat-label>Ship Name</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Ship Class</mat-label>
+            <mat-select>
+            <mat-option>
+                Hello
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</div>
+
+<div *ngIf data.option = 'transaction'>
+    <form class="example-form">
+        <mat-form-field class="login-input" appearance="fill">
+            <mat-label>Transaction Number</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="login-input" appearance="fill">
+            <mat-label>Origin</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="login-input" appearance="fill">
+            <mat-label>Destination</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Ship Class</mat-label>
+            <mat-select>
+            <mat-option>
+                Hello
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</div>
