@@ -7,25 +7,25 @@
 <mat-tab-group>
     <mat-tab label="Crews"> 
         <div class="add-btn">
-            <button mat-raised-button (click)="openDialog()">Add Crew</button>
+            <button mat-raised-button (click)="openDialog('crew')">Add Crew</button>
         </div>
     </mat-tab>
 
     <mat-tab label="Ships">   
         <div class="add-btn">
-            <button mat-raised-button (click)="openDialog()">Add Ship</button>
+            <button mat-raised-button (click)="openDialog('ship')">Add Ship</button>
         </div>
+    </mat-tab>
+
+    <mat-tab label="Deployment">         
+        <div class="add-btn">
+            <button mat-raised-button (click)="openDialog('deploy')">Deploy Crew</button>
+        </div> 
     </mat-tab>
 
     <mat-tab label="Transactions">         
         <div class="add-btn">
-            <button mat-raised-button (click)="openDialog()">Deploy</button>
-        </div> 
-    </mat-tab>
-
-    <mat-tab label="Contracts">         
-        <div class="add-btn">
-            <button mat-raised-button (click)="openDialog()">Deploy</button>
+            <button mat-raised-button (click)="openDialog('transaction')">Add Transaction</button>
         </div> 
     </mat-tab>
 

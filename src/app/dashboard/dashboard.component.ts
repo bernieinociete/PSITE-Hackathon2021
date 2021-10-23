@@ -14,11 +14,13 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDialog(){
+  openDialog(option:any){
     const dialogConfig = new MatDialogConfig();
-
+    
+    dialogConfig.maxWidth = '400px';
+    
     dialogConfig.data = {
-      option: 'crew'
+      option: option
     }
 
     const dialogRef = this.dialog.open(DialogsComponent, dialogConfig);

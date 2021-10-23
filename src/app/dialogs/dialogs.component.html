@@ -1,4 +1,4 @@
-<div *ngIf data.option = 'crew'>
+<div *ngIf="data.option == 'crew'">
     <form class="example-form">
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>First Name</mat-label>
@@ -16,7 +16,7 @@
             <input matInput>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field class="rank-input" appearance="fill">
             <mat-label>Ranks</mat-label>
             <mat-select>
             <mat-option>
@@ -26,7 +26,7 @@
         </mat-form-field>
     </form>
     <div>
-        <button mat-raised-button>Deploy</button>
+        <button class="fullwidth-btn" mat-raised-button>Upload Contract</button>
     </div> 
     
     <div class="add-btn">
@@ -38,14 +38,14 @@
     </div>
 </div>
 
-<div *ngIf data.option = 'ship'>
+<div *ngIf="data.option == 'ship'">
     <form class="example-form">
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>Ship Name</mat-label>
             <input matInput>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field class="fullwidth-btn" appearance="fill">
             <mat-label>Ship Class</mat-label>
             <mat-select>
             <mat-option>
@@ -54,32 +54,104 @@
             </mat-select>
         </mat-form-field>
     </form>
+
+    <div class="add-btn">
+        <button mat-raised-button>Add</button>
+    </div>
+
+    <div class="close-btn">
+        <button mat-raised-button>Cancel</button>
+    </div>
 </div>
 
-<div *ngIf data.option = 'transaction'>
+<div *ngIf="data.option == 'deploy'">
+    <form class="example-form">
+        <mat-form-field class="fullwidth-btn" appearance="fill">
+            <mat-label>Ship Name</mat-label>
+            <mat-select>
+            <mat-option>
+                Hello
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="fullwidth-btn" appearance="fill">
+            <mat-label>Rank/Position</mat-label>
+            <mat-select>
+            <mat-option>
+                Hello
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="fullwidth-btn" appearance="fill">
+            <mat-label>Crew</mat-label>
+            <mat-select>
+            <mat-option>
+                Hello
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+
+    <div class="add-btn">
+        <button mat-raised-button>Add</button>
+    </div>
+
+    <div class="close-btn">
+        <button mat-raised-button>Cancel</button>
+    </div>
+</div>
+
+
+<div *ngIf="data.option == 'transaction'">
     <form class="example-form">
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>Transaction Number</mat-label>
             <input matInput>
         </mat-form-field>
 
-        <mat-form-field class="login-input" appearance="fill">
-            <mat-label>Origin</mat-label>
-            <input matInput>
-        </mat-form-field>
-
-        <mat-form-field class="login-input" appearance="fill">
-            <mat-label>Destination</mat-label>
-            <input matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Ship Class</mat-label>
+        <mat-form-field class="fullwidth-btn" appearance="fill">
+            <mat-label>Ship Name</mat-label>
             <mat-select>
             <mat-option>
                 Hello
             </mat-option>
             </mat-select>
         </mat-form-field>
+
+        <p>Origin</p>
+        <mat-form-field class="login-input" appearance="fill">
+            <mat-label>Longitude</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field class="login-input" appearance="fill">
+            <mat-label>Latitude</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <p>Destination</p>
+        <mat-form-field class="login-input" appearance="fill">
+            <mat-label>Longitude</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="login-input" appearance="fill">
+            <mat-label>Latitude</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="login-input" appearance="fill">
+            <mat-label>ETA</mat-label>
+            <input matInput>
+        </mat-form-field>
     </form>
+
+    <div class="add-btn">
+        <button mat-raised-button>Add</button>
+    </div>
+
+    <div class="close-btn">
+        <button mat-raised-button>Cancel</button>
+    </div>
 </div>
