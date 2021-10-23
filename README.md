@@ -25,3 +25,15 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Instructions
+
+1. type npm install in your terminal
+2. import the gc_one.sql as its database (location: inside the api folder)
+3. type ng serve in your terminal to serve the project in your device
+
+## Admin Credentials
+
+Username: admin@seafearerinternational
+Password: Admin123!
+
