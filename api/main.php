@@ -1,6 +1,5 @@
 <?php 
 	require_once("./config/Config.php");
-	require_once("./models/OTP.php");
 
 	$db = new Connection();
 	$pdo = $db->connect();
@@ -28,55 +27,69 @@
 				break;
 				// USERS
 
-				case 'add':
+				// SHIP SPEED
+				case 'ship_speed':
+					if(count($req)>1){
+						echo json_encode($gm->exec_query($req[0], $req[1]));
+					} else {
+						echo json_encode($gm->exec_query($req[0], null));
+					}
+				break;
+				// SHIP SPEED
+
+				// SHIP
+				case 'ship':
+					if(count($req)>1){
+						echo json_encode($gm->exec_query($req[0], $req[1]));
+					} else {
+						echo json_encode($gm->exec_query($req[0], null));
+					}
+				break;
+				
+				case 'addShip':
 					$d = json_decode(base64_decode(file_get_contents("php://input")));
-					echo json_encode($gm->insert('tbl_', $d));
+					echo json_encode($gm->insert('tbl_ship', $d));
 				break;
 
-				case 'update':
+				case 'updateShip':
 					$d = json_decode(base64_decode(file_get_contents("php://input")));
-					echo json_encode($gm->update("tbl_", $d, "_id=$req[1]"));
+					echo json_encode($gm->update("tbl_ship", $d, "ship_id=$req[1]"));
 				break;
-				// CATEGORIES 
+				// SHIP
 
-				case 'checkEmail':
-					$d = json_decode(base64_decode(file_get_contents("php://input")));
-					echo json_encode($auth->checkEmail($d));
+				// CREW
+				case 'crew':
+					if(count($req)>1){
+						echo json_encode($gm->exec_query($req[0], $req[1]));
+					} else {
+						echo json_encode($gm->exec_query($req[0], null));
+					}
 				break;
 
-				case 'checkUsername':
+				case 'addCrew':
 					$d = json_decode(base64_decode(file_get_contents("php://input")));
-					echo json_encode($auth->checkUsername($d));
+					echo json_encode($gm->insert('tbl_crew', $d));
 				break;
 
-				case 'verifyEmail':
+				case 'updateCrew':
 					$d = json_decode(base64_decode(file_get_contents("php://input")));
-					echo json_encode($auth->verifyEmail($d));
+					echo json_encode($gm->update("tbl_crew", $d, "crew_id=$req[1]"));
 				break;
+				// CREW
+
+				// RANK
+				case 'rank':
+					if(count($req)>1){
+						echo json_encode($gm->exec_query($req[0], $req[1]));
+					} else {
+						echo json_encode($gm->exec_query($req[0], null));
+					}
+				break;
+				// RANK
 
 				case 'login':
 					$d = json_decode(base64_decode(file_get_contents("php://input")));
 					echo json_encode($auth->login($d));
-				break;
-
-				case 'register':
-					$d = json_decode(base64_decode(file_get_contents("php://input")));
-					echo json_encode($auth->register($d));
-				break;
-
-				case 'sendOTP':
-					$d = json_decode(base64_decode(file_get_contents("php://input")));
-					echo sendOTP($d);
-				break;
-
-				case 'getOTP':
-					$d = json_decode(base64_decode(file_get_contents("php://input")));
-					echo json_encode($post->getOTP($d));
-				break;
-
-				case 'updateProfile':
-					$d = json_decode(base64_decode(file_get_contents("php://input")));
-					echo json_encode($gm->update("accounts", $d, "acc_id = $req[1]"));
 				break;
 
 				case 'updatePassword':

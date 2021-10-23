@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { DialogsComponent } from '../dialogs/dialogs.component';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +11,7 @@ import { DialogsComponent } from '../dialogs/dialogs.component';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private _ds: DataService, private _router: Router) { }
 
   ngOnInit(): void {
   }
@@ -28,6 +30,10 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  logout() {
+    this._router.navigate(['/'])
   }
 
 }

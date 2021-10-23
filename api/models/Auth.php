@@ -69,25 +69,17 @@
 			$remarks = "";
 			$payload = "";
 
-			$this->sql="SELECT * FROM tbl_user WHERE user_email='$dt->user_email' LIMIT 1";
+			$this->sql="SELECT * FROM tbl_account WHERE account_username='$dt->account_username' LIMIT 1";
 
 			try {
 				if ($res = $this->pdo->query($this->sql)->fetchColumn()>0) {
 					$result=$this->pdo->query($this->sql)->fetchAll();
 
 					foreach ($result as $rec) { 
-						if($this->pwordCheck($dt->user_pword, $rec['user_pword'])){
-							$uc = $rec['user_id'];
-							$ue = $rec['user_email'];
-							$fn = $rec['user_fname'].' '.$rec['user_lname'];
-							$user_status = $rec['user_status'];
-							$user_role = $rec['user_role'];
-							$tk = $this->generateToken($uc, $ue, $fn);
+						if($this->pwordCheck($dt->account_password, $rec['account_password'])){
+							$fn = $rec['account_username'];
 
-							$sql = "UPDATE tbl_user SET user_token='$tk' WHERE user_id='$uc'";
-							$this->pdo->query($sql);
-
-							$payload = array("id"=>$uc, "fullname"=>$fn, "key"=>$tk, "user_status"=>$user_status, "role"=>$user_role); 
+							$payload = array("username"=>$fn);
 							$code = 200; 
 							$msg = "Logged in successfully"; 
 							$remarks = "success";

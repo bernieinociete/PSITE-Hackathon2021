@@ -12,9 +12,8 @@
 	require_once("./models/Auth.php");
 	require_once("./models/Get.php");
 	require_once("./models/Post.php");
-	require_once("./models/OTP.php");
 
-	define("DBASE", "psite_hackathon2021");
+	define("DBASE", "gc_one");
 	define("USER", "root");
 	define("PW", "");
 	define("SERVER", "localhost");

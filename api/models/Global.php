@@ -11,45 +11,30 @@
 
 			$this->sql = "SELECT * FROM tbl_$table";
 
-			if($table == "user") {
-				$this->sql .= " WHERE user_status = 1 AND user_role = 1";
-
+			if($table == "ship_speed") {
 				if($filter_data != null) {
-					$this->sql .= " AND user_id=$filter_data";
+					$this->sql .= " WHERE ship_speed_id=$filter_data";
 				}
 			}
 
-			if($table == "category") {
-				$this->sql .= " WHERE category_status=1";
-
+			if($table == "ship") {
+				$this->sql .= " LEFT JOIN tbl_ship_speed ON tbl_ship_speed.ship_speed_id = tbl_ship.ship_speed_id WHERE tbl_ship.ship_status = 1";
 				if($filter_data != null) {
-					$this->sql .= " AND category_id=$filter_data";
+					$this->sql .= " AND ship_id=$filter_data";
 				}
 			}
 
-			if($table == "subcategory") {
-				$this->sql .= " LEFT JOIN tbl_category ON tbl_category.category_id = tbl_subcategory.category_id 
-				WHERE tbl_subcategory.subcategory_status=1";
-
+			if($table == "crew") {
+				$this->sql .= " LEFT JOIN tbl_rank ON tbl_rank.rank_id = tbl_crew.rank_id
+				LEFT JOIN tbl_ship ON tbl_ship.ship_id = tbl_crew.ship_id WHERE tbl_crew.crew_status = 1" ;
 				if($filter_data != null) {
-					$this->sql .= " AND tbl_subcategory.subcategory_id=$filter_data";
+					$this->sql .= " AND crew_id=$filter_data";
 				}
 			}
 
-			if($table == "product") {
-				$this->sql .= " LEFT JOIN tbl_user ON tbl_user.user_id = tbl_product.user_id 
-					LEFT JOIN tbl_category ON tbl_category.category_id = tbl_product.category_id
-					LEFT JOIN tbl_subcategory ON tbl_subcategory.subcategory_id = tbl_product.subcategory_id
-					WHERE tbl_product.product_status=1";
-
+			if($table == "rank") {
 				if($filter_data != null) {
-					$this->sql .= " AND tbl_product.product_id=$filter_data";
-				}
-			}
-
-			if($table == "coupon") {
-				if($filter_data != null) {
-					$this->sql .= " WHERE coupon_id = $filter_data";
+					$this->sql .= " WHERE rank_id=$filter_data";
 				}
 			}
 
@@ -67,6 +52,7 @@
 
 		public function insert($table, $data){
 			$i = 0; $fields=[]; $values=[];
+
 			foreach ($data as $key => $value) {
 				array_push($fields, $key);
 				array_push($values, $value);

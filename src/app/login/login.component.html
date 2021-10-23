@@ -4,19 +4,19 @@
             <mat-card-title class="login-title">Seafarer International</mat-card-title>
             <mat-card-title class="login-title">Agency Management System</mat-card-title>
             
-            <form class="example-form">
+            <form (submit)="login()">
                 <mat-form-field class="login-input" appearance="fill">
                   <mat-label>Username</mat-label>
-                  <input matInput>
+                  <input type="text" [(ngModel)]="account_username" name="account_username" matInput>
                 </mat-form-field>
 
                 <mat-form-field class="login-input" appearance="fill">
                     <mat-label>Password</mat-label>
-                    <input matInput>
-                  </mat-form-field>
+                    <input type="password" [(ngModel)]="account_password" name="account_password" matInput>
+                </mat-form-field>
+                  
+                <button type="submit" mat-button class="login-btn" color="primary">Login</button>
             </form>
-
-            <button mat-button class="login-btn" color="primary">Login</button>
         </mat-card>
     </div>
 </div>
