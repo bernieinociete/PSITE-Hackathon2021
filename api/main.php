@@ -113,14 +113,15 @@
 				break;
 				// RANK
 
+				// TRANSACTION
+				case 'addTransaction':
+					$d = json_decode(base64_decode(file_get_contents("php://input")));
+					echo json_encode($gm->insert('tbl_transaction', $d));
+				break;
+
 				case 'login':
 					$d = json_decode(base64_decode(file_get_contents("php://input")));
 					echo json_encode($auth->login($d));
-				break;
-
-				case 'updatePassword':
-					$d = json_decode(base64_decode(file_get_contents("php://input")));
-					echo json_encode($auth->updatePassword($d, "acc_id = $req[1]"));
 				break;
 
 				default:

@@ -101,53 +101,63 @@
     </div>
 </div>
 
-
 <div *ngIf="data.option == 'transaction'">
-    <form class="example-form">
+    <form (submit)="addTransaction()" class="example-form">
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>Transaction Number</mat-label>
-            <input matInput>
+            <input [(ngModel)]="transaction_no" name="transaction_no" matInput>
         </mat-form-field>
 
         <mat-form-field class="fullwidth-btn" appearance="fill">
             <mat-label>Ship Name</mat-label>
-            <mat-select>
-            <mat-option>
-                Hello
-            </mat-option>
+            <mat-select [(ngModel)]="ship_id" name="ship_id">
+                <mat-option *ngFor="let ship of ship_data" value="{{ship.ship_id}}">{{ship.ship_name}}</mat-option>
             </mat-select>
         </mat-form-field>
 
         <p>Origin</p>
         <mat-form-field class="login-input" appearance="fill">
-            <mat-label>Longitude</mat-label>
-            <input matInput>
+            <mat-label>Latitude</mat-label>
+            <input type="number"[(ngModel)]="transaction_origin_latitude" name="transaction_origin_latitude" matInput>
         </mat-form-field>
         <mat-form-field class="login-input" appearance="fill">
-            <mat-label>Latitude</mat-label>
-            <input matInput>
+            <mat-label>Longitude</mat-label>
+            <input type="number" [(ngModel)]="transaction_origin_longitude" name="transaction_origin_longitude" matInput>
         </mat-form-field>
 
         <p>Destination</p>
         <mat-form-field class="login-input" appearance="fill">
+            <mat-label>Latitude</mat-label>
+            <input type="number" [(ngModel)]="transaction_destination_latitude" name="transaction_destination_latitude" matInput>
+        </mat-form-field>
+        <mat-form-field class="login-input" appearance="fill">
             <mat-label>Longitude</mat-label>
-            <input matInput>
+            <input type="number"[(ngModel)]="transaction_destination_longitude" name="transaction_destination_longitude" matInput>
         </mat-form-field>
 
+
+        <p>Unit Distance</p>
         <mat-form-field class="login-input" appearance="fill">
-            <mat-label>Latitude</mat-label>
-            <input matInput>
+            <mat-label>Unit Distance</mat-label>
+            <mat-select [(ngModel)]="unit_distance" name="unit_distance">
+                <mat-option value="K">Kilometers</mat-option>
+                <mat-option value="N">Nautical Miles</mat-option>
+            </mat-select>
         </mat-form-field>
+
+        <div class="add-btn">
+            <button (click)="computeETA()" mat-raised-button>Compute ETA</button>
+        </div>
 
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>ETA</mat-label>
-            <input matInput>
+            <input [(ngModel)]="transaction_eta" name="transaction_eta" matInput>
         </mat-form-field>
+        
+        <div class="add-btn">
+            <button type="submit" mat-raised-button>Add</button>
+        </div>
     </form>
-
-    <div class="add-btn">
-        <button mat-raised-button>Add</button>
-    </div>
 
     <div class="close-btn">
         <button (click)="closeDialog()" mat-raised-button>Cancel</button>

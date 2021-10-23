@@ -3,6 +3,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { DataService } from '../services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import geoDistance from '../geoDistance';
+
 
 @Component({
   selector: 'app-dialogs',
@@ -41,6 +43,14 @@ export class DialogsComponent implements OnInit {
     })
   }
 
+  // SHIP
+  ship_data: any[] = []
+  pullShip() {
+    this._ds.sendApiRequest('ship/', null).subscribe((data: {payload: any}) => {
+      this.ship_data = data.payload
+    })
+  }
+
   // ADD CREW
   files: File[] = []
   onSelect(event: any) {   
@@ -72,7 +82,7 @@ export class DialogsComponent implements OnInit {
     }, (er:any)=>{
       this._snackBar.open("Failed", 'Try Again', {
         duration:1500
-      });
+      })
     })
   }
 
@@ -100,21 +110,68 @@ export class DialogsComponent implements OnInit {
   }
   // ADD SHIP
 
+  // ADD TRANSACTION
+  transaction_no: any
+  transaction_eta: any
+  transaction_origin_latitude: any
+  transaction_origin_longitude: any
+  transaction_destination_latitude: any
+  transaction_destination_longitude: any
+  unit_distance: any = 'K'
+  ship_id: any
+  transaction_info: any = {}
+
+  addTransaction() {
+
+  }
+
+  distance: any
+  computeETA() {
+    this.transaction_info.transaction_no = this.transaction_no
+    this.transaction_info.transaction_eta = this.transaction_eta
+    this.transaction_info.transaction_origin_latitude = this.transaction_origin_latitude
+    this.transaction_info.transaction_origin_longitude = this.transaction_origin_longitude
+    this.transaction_info.transaction_destination_latitude = this.transaction_destination_latitude
+    this.transaction_info.transaction_destination_longitude = this.transaction_destination_longitude
+    this.transaction_info.ship_id = this.ship_id
+
+    const point1 = { lat: this.transaction_origin_latitude, lng: this.transaction_origin_longitude}
+    const point2 = { lat: this.transaction_destination_latitude, lng: this.transaction_destination_longitude}
+
+    console.log(point1)
+    console.log(point2)
+    this.distance = geoDistance(point1, point2, this.unit_distance)
+    const eta = 23/this.distance
+    console.log(this.distance)
+
+    this._ds.sendApiRequest('ship/' + this.ship_id, null).subscribe((data: {payload: any}) => {
+      let ship_speed;
+      ship_speed = data.payload[0].ship_speed_knots
+
+      if(this.unit_distance == 'K') {
+        let speed = ship_speed * 1.852
+        this.transaction_eta = this.distance/speed
+
+        this._ds.sendApiRequest('addTransaction/', this.transaction_info).subscribe((data: {payload: any}) => { 
+          this.sendMessage()
+        })
+      }
+      if(this.unit_distance == 'N') {
+        let distance = this.distance * 1.852
+        let speed = ship_speed * 1.852
+        this.transaction_eta = distance/speed
+      }
+    })
+  }
+  // ADD TRANSACTION
+
   closeDialog(){
-    this.dialogRef.close();
+    this.dialogRef.close()
   }
 
   logout() {
     this._router.navigate(['/'])
     this.closeDialog();
-  }
-
-  ship_data: any[] = []
-  pullShip() {
-    this._ds.sendApiRequest('ship/', null).subscribe((data: {payload: any}) => {
-      this.ship_data = data.payload;
-      console.log(this.ship_data);
-    })
   }
 
   crew_data: any[] = []
