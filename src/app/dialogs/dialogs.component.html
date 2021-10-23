@@ -2,42 +2,40 @@
     <form (submit)="addCrew()" class="example-form">
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>First Name</mat-label>
-            <input type="text" [(ngModel)]="crew_fname" name="crew_fname" matInput>
+            <input type="text" [(ngModel)]="crew_fname" name="crew_fname" matInput required>
         </mat-form-field>
 
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>Middle Name</mat-label>
             <input type="text" [(ngModel)]="crew_mname" name="crew_mname" matInput>
         </mat-form-field>
+
         
         <mat-form-field class="login-input" appearance="fill">
             <mat-label>Last Name</mat-label>
-            <input type="text" [(ngModel)]="crew_lname" name="crew_lname" matInput>
+            <input type="text" [(ngModel)]="crew_lname" name="crew_lname" matInput required>
         </mat-form-field>
 
-        <mat-form-field class="rank-input" appearance="fill">
+        <mat-form-field class="rank-input" appearance="fill" required>
             <mat-label>Ranks</mat-label>
             <mat-select [(ngModel)]="rank_id" name="rank_id">
                 <mat-option *ngFor="let rank of rank_data" value="{{rank.rank_id}}">{{rank.rank_name}}</mat-option>
             </mat-select>
         </mat-form-field>
-
-        <input class="fullwidth-btn" mat-raised-button type="file" (change)="onSelect($event)">
-        <!-- <button >Upload Contract</button> -->
-
-        <!-- <mat-form-field class="contract-input" appearance="fill">
-            <mat-label>Contract</mat-label>
-            <input class="fullwidth-btn" mat-raised-button type="file" (change)="onSelect($event)">
-            <button >Upload Contract</button>
-        </mat-form-field> -->
+        <div>
+            <p><strong>Upload Contract</strong></p>
+            <input type="file" (change)="onSelect($event)" required>
+        
+        </div> 
         
         <div class="add-btn">
             <button type="submit" mat-raised-button>Add</button>
         </div>
+
+        <div class="close-btn">
+            <button type="button" (click)="closeDialog()" mat-raised-button>Cancel</button>
+        </div>
     </form>
-    <div class="close-btn">
-        <button mat-raised-button>Cancel</button>
-    </div>
 </div>
 
 <div *ngIf="data.option == 'ship'">
@@ -57,10 +55,11 @@
         <div class="add-btn">
             <button type="submit" mat-raised-button>Add</button>
         </div>
+
+        <div class="close-btn">
+            <button type="button" (click)="closeDialog()" mat-raised-button>Cancel</button>
+        </div>
     </form>
-    <div class="close-btn">
-        <button mat-raised-button>Cancel</button>
-    </div>
 </div>
 
 <div *ngIf="data.option == 'deploy'">
@@ -68,8 +67,8 @@
         <mat-form-field class="fullwidth-btn" appearance="fill">
             <mat-label>Ship Name</mat-label>
             <mat-select>
-            <mat-option>
-                Hello
+            <mat-option *ngFor="let ship of ship_data"  value="{{ship.ship_name}}">
+                {{ship.ship_name}}
             </mat-option>
             </mat-select>
         </mat-form-field>
@@ -77,8 +76,8 @@
         <mat-form-field class="fullwidth-btn" appearance="fill">
             <mat-label>Rank/Position</mat-label>
             <mat-select>
-            <mat-option>
-                Hello
+            <mat-option  *ngFor="let rank of rank_data"  value="{{rank.rank_name}}">
+                {{rank.rank_name}}
             </mat-option>
             </mat-select>
         </mat-form-field>
@@ -86,8 +85,8 @@
         <mat-form-field class="fullwidth-btn" appearance="fill">
             <mat-label>Crew</mat-label>
             <mat-select>
-            <mat-option>
-                Hello
+            <mat-option *ngFor="let crew of crew_data"  value="{{crew.crew_name}}">
+                {{crew.crew_fname}} {{crew.crew_mname}} {{crew.crew_lname}}
             </mat-option>
             </mat-select>
         </mat-form-field>
@@ -98,7 +97,7 @@
     </div>
 
     <div class="close-btn">
-        <button (click)="closeDialog()" mat-raised-button>Cancel</button>
+        <button type="button" (click)="closeDialog()" mat-raised-button>Cancel</button>
     </div>
 </div>
 
@@ -153,4 +152,20 @@
     <div class="close-btn">
         <button (click)="closeDialog()" mat-raised-button>Cancel</button>
     </div>
+
+
+</div>
+
+
+<div *ngIf="data.option == 'logout'">
+    <h3>Are you sure you want to logout?</h3>
+    <div class="add-btn">
+        <button (click)="logout()" mat-raised-button>Okay</button>
+    </div>
+
+    <div class="close-btn">
+        <button (click)="closeDialog()" mat-raised-button>Cancel</button>
+    </div>
+
+    
 </div>

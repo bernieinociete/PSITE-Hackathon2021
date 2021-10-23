@@ -71,8 +71,5 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  logout() {
-    this._router.navigate(['/'])
-  }
 
 }

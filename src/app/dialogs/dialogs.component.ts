@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialogs',
@@ -12,11 +12,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class DialogsComponent implements OnInit {
   formData: FormData = new FormData();
 
-  constructor(  @Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<DialogsComponent>, private _ds: DataService, public _snackBar: MatSnackBar) { }
+  constructor(  @Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<DialogsComponent>, private _ds: DataService, public _snackBar: MatSnackBar, private _router: Router) { }
 
   ngOnInit(): void {
     this.pullRank()
     this.pullSpeed()
+    this.pullShip()
+    this.pullCrew()
   }
 
   sendMessage(): void {
@@ -63,8 +65,12 @@ export class DialogsComponent implements OnInit {
     this._ds.sendFileRequest('addCrew', this.formData).subscribe((data: {payload:any}) => {
       this.sendMessage()
       this.closeDialog()
+      this._snackBar.open("Success", 'Okay', {
+        duration:1500
+      });
+
     }, (er:any)=>{
-      this._snackBar.open("Wrong Credentials", 'Try Again', {
+      this._snackBar.open("Failed", 'Try Again', {
         duration:1500
       });
     })
@@ -83,11 +89,38 @@ export class DialogsComponent implements OnInit {
     this._ds.sendApiRequest('addShip', this.ship_info).subscribe((data: {payload:any}) => {
       this.sendMessage()
       this.closeDialog()
+      this._snackBar.open("Success", 'Okay', {
+        duration:1500
+      });
+    }, (er:any)=>{
+      this._snackBar.open("Failed", 'Try Again', {
+        duration:1500
+      });
     })
   }
   // ADD SHIP
 
   closeDialog(){
     this.dialogRef.close();
+  }
+
+  logout() {
+    this._router.navigate(['/'])
+    this.closeDialog();
+  }
+
+  ship_data: any[] = []
+  pullShip() {
+    this._ds.sendApiRequest('ship/', null).subscribe((data: {payload: any}) => {
+      this.ship_data = data.payload;
+      console.log(this.ship_data);
+    })
+  }
+
+  crew_data: any[] = []
+  pullCrew() {
+    this._ds.sendApiRequest('crew/', null).subscribe((data: {payload: any}) => {
+      this.crew_data = data.payload;
+    })
   }
 }
